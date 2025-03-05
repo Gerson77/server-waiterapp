@@ -7,6 +7,9 @@ import { Server } from 'socket.io'
 import 'dotenv/config'
 
 const URL_DB: string = process.env.MONGO_ATLAS || ''
+
+const URL_FE: string = process.env.URL_FRONTEND || ''
+
 const app = express()
 const server = http.createServer(app)
 export const io = new Server(server)
@@ -16,7 +19,7 @@ mongoose.connect(URL_DB)
     const port = 3000
 
     app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'),
+      res.setHeader('Access-Control-Allow-Origin', URL_FE),
       res.setHeader('Access-Control-Allow-Methods', '*'),
       res.setHeader('Access-Control-Allow-Headers', '*')
 
