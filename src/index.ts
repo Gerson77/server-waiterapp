@@ -6,7 +6,7 @@ import http from 'node:http'
 import { Server } from 'socket.io'
 import 'dotenv/config'
 
-const URL_DB: string = process.env.MONGO_ATLAS || ''
+const URL_DB: string = process.env.MONGODB_URI || ''
 
 const URL_FE: string = process.env.URL_FRONTEND || ''
 
