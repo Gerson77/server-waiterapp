@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Order } from "../../models/Order";
-import { io } from "../../..";
+// import { io } from "../../..";
 
 export async function createOrder(req: Request, res: Response) {
   try {
@@ -12,7 +12,7 @@ export async function createOrder(req: Request, res: Response) {
     });
     const orderDetails = await order.populate('products.product')
 
-    io.emit('order@new', orderDetails)
+    // io.emit('order@new', orderDetails)
     res.status(201).json(order);
   } catch (error) {
     console.log(error)
