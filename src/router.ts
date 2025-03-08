@@ -32,45 +32,53 @@ const upload = multer({
 });
 
 // List Categories
-router.get("/categories", listCategories);
+router.get("/categories", ensureAuthenticate, listCategories);
 
 // Create category
-router.post("/categories", createCategories);
+router.post("/categories", ensureAuthenticate, createCategories);
 
 // Delete Category
-router.delete("/category/:categoryId", deleteCategory);
+router.delete("/category/:categoryId", ensureAuthenticate, deleteCategory);
 
 // List products
-router.get("/products", listProducts);
+router.get("/products", ensureAuthenticate, listProducts);
 
 // Create product
-router.post("/products", upload.single("image"), createProducts);
+router.post(
+  "/products",
+  upload.single("image"),
+  ensureAuthenticate,
+  createProducts
+);
 
 // Get products by category
-router.get("/categories/:categoryId/products", listproductsByCategory);
+router.get(
+  "/categories/:categoryId/products",
+  ensureAuthenticate,
+  listproductsByCategory
+);
 
 // Delete product
-router.delete("/product/:productId", deleteProduct);
+router.delete("/product/:productId", ensureAuthenticate, deleteProduct);
 
 // List orders
-router.get("/orders", listOrders);
+router.get("/orders", ensureAuthenticate, listOrders);
 
 // Create orders
-router.post("/orders", createOrder);
+router.post("/orders", ensureAuthenticate, createOrder);
 
 // Change order status
-router.patch("/orders/:orderId", changeOrderStatus);
+router.patch("/orders/:orderId", ensureAuthenticate, changeOrderStatus);
 
 // Delete/cancel order
-router.delete("/orders/:orderId", cancelOrder);
-
+router.delete("/orders/:orderId", ensureAuthenticate, cancelOrder);
 
 // List Users
-router.get('/users', ensureAuthenticate, listUsers)
+router.get("/users", ensureAuthenticate, listUsers);
 
-router.post('/users', ensureAuthenticate, createUser)
+router.post("/users", ensureAuthenticate, createUser);
 
-router.delete('/user/:userId', ensureAuthenticate, deleteUser)
+router.delete("/user/:userId", ensureAuthenticate, deleteUser);
 
 // Authentication
-router.post('/login', login)
+router.post("/login", login);
