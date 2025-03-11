@@ -17,6 +17,7 @@ import { createUser } from "./app/useCases/users/createUser";
 import { deleteUser } from "./app/useCases/users/deleteUser";
 import { login } from "./app/useCases/auth/login";
 import { ensureAuthenticate } from "./app/shared/middleware/auth";
+import { saveTokenNotification } from "./app/useCases/notifications/saveTokenNotification";
 
 export const router = Router();
 
@@ -82,3 +83,5 @@ router.delete("/user/:userId", ensureAuthenticate, deleteUser);
 
 // Authentication
 router.post("/login", login);
+
+router.post('/registerPushToken/:userId', saveTokenNotification)

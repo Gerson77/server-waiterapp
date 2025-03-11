@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 export const Order = model(
   "Order",
@@ -6,6 +6,10 @@ export const Order = model(
     table: {
       type: String,
       required: true,
+    },
+    employeeId: {
+      type: Types.ObjectId,
+      required: true
     },
     status: {
       type: String,
