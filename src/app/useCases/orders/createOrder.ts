@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Order } from "../../models/Order";
 import { io } from "../../..";
+import { createNotification } from "../notifications/createNotification";
 
 export async function createOrder(req: Request, res: Response) {
   try {
@@ -12,6 +13,8 @@ export async function createOrder(req: Request, res: Response) {
       employeeId
     });
     const orderDetails = await order.populate('products.product')
+
+    await createNotification(order._id , employeeId, table, 'WAITING')
 
     io.emit('order@new', orderDetails)
     res.status(201).json(order);

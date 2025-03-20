@@ -17,7 +17,7 @@ export class JWTtoken implements IToken {
       this.SECRET_TOKEN,
       {
         subject: data._id.toString(),
-        expiresIn: "30m",
+        expiresIn: "60m",
       }
     );
     return token;

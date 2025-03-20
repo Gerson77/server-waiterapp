@@ -9,7 +9,6 @@ export async function createUser(req: Request, res: Response) {
 
     const passwordHash = await new PasswordBcrypt().hash(password)
 
-
     const users = await User.create({
       name, email, password: passwordHash, role
     });

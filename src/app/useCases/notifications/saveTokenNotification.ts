@@ -7,6 +7,11 @@ export async function saveTokenNotification(req: Request, res: Response) {
     const { userId } = req.params;
     const { token } = req.body;
 
+    if (!token) {
+      res.status(400).json({ error: 'Token é obrigatório' });
+      return
+    }
+
     const userExists = await User.findById(userId);
     if (!userExists) {
       res.status(400).json({ message: "User does not exist" });
