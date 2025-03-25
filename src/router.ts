@@ -20,6 +20,7 @@ import { saveTokenNotification } from "./app/useCases/notifications/saveTokenNot
 import { getNotification } from "./app/useCases/notifications/getNotification";
 import { removeTokenNotification } from "./app/useCases/notifications/removeTokenNotification";
 import { updatedNotification } from "./app/useCases/notifications/updatedNotification";
+import { refreshAuth } from "./app/useCases/auth/refresh";
 
 export const router = Router();
 
@@ -79,6 +80,9 @@ router.delete('/user/:userId', ensureAuthenticate, deleteUser)
 
 // Authentication
 router.post('/login', login)
+
+// RefreshToken
+router.post('/refresh-token', refreshAuth)
 
 // Save Notification push
 router.post('/registerPushToken/:userId', ensureAuthenticate,saveTokenNotification)
