@@ -3,6 +3,7 @@ import { Order } from "../../models/Order";
 import { Expo } from "expo-server-sdk";
 import { TokenNotification } from "../../models/TokenNotification";
 import { createNotification } from "../notifications/createNotification";
+import { io } from "../../..";
 
 const expo = new Expo();
 
@@ -26,12 +27,14 @@ export async function changeOrderStatus(req: Request, res: Response) {
       return;
     }
 
-    await createNotification(
+    const notification = await createNotification(
       orderChange._id,
       orderChange.employeeId.toString(),
       orderChange.table,
       status
     );
+
+    io.emit('notification@new', notification)
 
     if (status === "IN_PRODUCTION") {
       const userTokens = await TokenNotification.findOne({
