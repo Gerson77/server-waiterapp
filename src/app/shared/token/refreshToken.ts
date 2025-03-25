@@ -41,11 +41,6 @@ export class RefreshToken {
 
       await redisClient.setValue(String(user._id), newRefreshToken)
 
-      console.log({
-        token: tokenGenerated,
-        refreshToken: newRefreshToken,
-      })
-
       return {
         token: tokenGenerated,
         refreshToken: newRefreshToken,
